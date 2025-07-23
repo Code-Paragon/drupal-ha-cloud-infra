@@ -40,4 +40,3 @@ terraform.rc
 .crash
 *.backup
 *.log
-.idea
