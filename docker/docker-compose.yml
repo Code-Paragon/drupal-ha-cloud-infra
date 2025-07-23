@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  drupal:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: drupal-app
+    ports:
+      - "8080:80"
+    depends_on:
+      - db
+    env_file:
+      - .env
+    environment:
+      DRUPAL_DB_HOST: db
+      DRUPAL_DB_NAME: ${MYSQL_DATABASE}
+      DRUPAL_DB_USER: ${MYSQL_USER}
+      DRUPAL_DB_PASSWORD: ${MYSQL_PASSWORD}
+    volumes:
+      - drupal-data:/var/www/html
+
+  db:
+    image: mysql:8.0
+    container_name: drupal-db
+    restart: always
+    env_file:
+      - .env
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+volumes:
+  drupal-data:
+  mysql-data:

@@ -1,0 +1,11 @@
+---
+- name: Install PHP and extensions
+  yum:
+    name:
+      - php
+      - php-mysqlnd
+      - php-gd
+      - php-xml
+      - php-mbstring
+      - php-json
+    state: present

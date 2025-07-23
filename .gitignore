@@ -4,6 +4,7 @@
 # .tfstate files
 *.tfstate
 *.tfstate.*
+*.tfstate.backup
 
 # Crash log files
 crash.log
@@ -35,3 +36,67 @@ override.tf.json
 # Ignore CLI configuration files
 .terraformrc
 terraform.rc
+
+.crash
+*.backup
+*.log
+
+# ===============================
+# Ansible
+# ===============================
+*.retry
+*.vault
+*.yml.vault
+vault_pass.txt
+ansible/vars/secrets.yml
+inventory/aws_ec2.yaml.cache
+
+# ===============================
+# Docker
+# ===============================
+**/docker-compose.override.yml
+**/.env
+**/docker/*.env
+**/docker/*.log
+**/docker/tmp
+**/docker/db-data/
+
+# ===============================
+# Helm/K8s
+# ===============================
+*.tgz
+**/charts/*
+**/monitoring/charts/*/templates/.helmignore
+**/monitoring/charts/*/values.yaml.backup
+
+# ===============================
+# CI/CD
+# ===============================
+*.log
+*.pid
+.cicd/tmp/
+coverage/
+sonar-project.properties.backup
+
+# ===============================
+# System & IDE
+# ===============================
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo
+*.bak
+*.tmp
+*.orig
+
+# ===============================
+# Python (if you ever use)
+# ===============================
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+env/
+.venv/

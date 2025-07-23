@@ -1,0 +1,27 @@
+---
+- name: Download latest Drupal
+  get_url:
+    url: https://ftp.drupal.org/files/projects/drupal-10.1.4.tar.gz
+    dest: /tmp/drupal.tar.gz
+
+- name: Extract Drupal
+  unarchive:
+    src: /tmp/drupal.tar.gz
+    dest: /var/www/html/
+    remote_src: yes
+
+- name: Move Drupal files to Apache root
+  command: mv /var/www/html/drupal-10.1.4/* /var/www/html/
+
+- name: Set ownership of web root
+  file:
+    path: /var/www/html/
+    state: directory
+    recurse: yes
+    owner: apache
+    group: apache
+
+- name: Ensure Apache is restarted
+  service:
+    name: httpd
+    state: restarted

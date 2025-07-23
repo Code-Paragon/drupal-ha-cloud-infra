@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: drupal-deployment
+  namespace: drupal-prod
+  labels:
+    app: drupal
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: drupal
+  template:
+    metadata:
+      labels:
+        app: drupal
+    spec:
+      containers:
+        - name: drupal
+          image: drupal:10.1.4-apache
+          ports:
+            - containerPort: 80
+          env:
+            - name: DRUPAL_DB_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: drupal-config
+                  key: db_host
+            - name: DRUPAL_DB_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: drupal-config
+                  key: db_name
+            - name: DRUPAL_DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: drupal-secrets
+                  key: username
+            - name: DRUPAL_DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: drupal-secrets
+                  key: password

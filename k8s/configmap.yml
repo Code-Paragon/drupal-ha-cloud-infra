@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: drupal-config
+  namespace: drupal-prod
+data:
+  db_host: "your-rds-endpoint.amazonaws.com"
+  db_name: "drupaldb"

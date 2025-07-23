@@ -1,0 +1,14 @@
+---
+- name: Provision Drupal Web Servers
+  hosts: tag_Role_webserver
+  become: yes
+
+  vars_files:
+    - ../vars/secrets.yml
+
+  roles:
+    - common
+    - apache
+    - php
+    - mysql_client
+    - drupal

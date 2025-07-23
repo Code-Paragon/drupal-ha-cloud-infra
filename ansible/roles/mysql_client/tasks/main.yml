@@ -1,0 +1,5 @@
+---
+- name: Install MySQL client
+  yum:
+    name: mysql
+    state: present
